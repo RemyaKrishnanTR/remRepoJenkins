@@ -1,0 +1,1150 @@
+Devops NOTES
+#################################################################################################################################################
+
+SDLC: Software Development Life cycle: Design->Develop->Test->Deliver
+it is the process followed to design, develop, test, and deploy software systematically.
+
+
+🔁 Phases of SDLC (Simplified for QA/Interviews):
+
+1.Requirement Analysis:
+Understanding the business needs.
+QA involvement: Review requirements, identify testable conditions.
+
+2.Design:
+Architecture and system design.
+QA involvement: Prepare test plan, start test case design.
+
+3.Development:
+Code is written based on the design.
+QA involvement: Prepare test data, understand feature logic.
+
+4.Testing:
+Functional, regression, integration, UAT, etc.
+QA executes tests, raises bugs, ensures quality.
+
+5.Deployment
+Code is deployed to staging/production.
+QA may perform smoke/sanity testing post-deploy.
+
+6.Maintenance
+Bug fixes, patches, support.
+QA tests hotfixes and regression.
+
+🧠 For Interviews (QA/Automation context):
+✅ "QA should be involved from the requirement phase to understand acceptance criteria early, contribute to test planning, and ensure better test coverage.
+We follow an Agile-based SDLC where we test in sprints, automate regression packs, and validate each user story before release."
+
+#################################################################################################################################################
+SDLC Models:
+
+Waterfall model :Requirements->Design->Development->Testing->Deployment->Maintenance
+Agile->Flexible and Adaptive
+
+###############################################################################################################################################
+Devops:
+1.Automate and streamline the software delivery process
+2.From code commit to production deployment, DevOps helps release faster, more reliably, and with better collaboration.
+3.DevOps helps reduce manual intervention in deployment and testing.
+4.It promotes faster feedback, early defect detection, and smoother release cycles.
+5.QA teams often integrate test automation into CI/CD pipelines to support continuous testing.
+ 
+ 🔄 Key Responsibilities in DevOps:
+1.CI/CD (Continuous Integration & Continuous Deployment)
+	Automatically build, test, and deploy code.
+	Tools: Jenkins, GitHub Actions, GitLab CI, CircleCI
+ 
+2.Infrastructure as Code (IaC)
+	Automate provisioning of servers, databases, etc.
+	Tools: Terraform, AWS CloudFormation, Ansible
+
+3.Monitoring & Logging
+	Detect performance issues, outages, or bugs early.
+	Tools: Prometheus, Grafana, ELK Stack, Datadog
+
+4.Configuration Management
+	Ensure environments (QA, staging, prod) stay consistent.
+	Tools: Chef, Puppet, Ansible
+
+5.Containerization & Orchestration
+	Run apps in containers (lightweight VMs).
+	Tools: Docker, Kubernetes
+
+6.Collaboration & Release Management
+	Coordinate between dev, QA, and ops for faster delivery.
+	Handle versioning, rollback, approvals.
+###########################################################################################################################################
+✅ What is a Version Control System (VCS)?
+A Version Control System is a tool that helps track and manage changes to code or files over time. It allows multiple developers (or QA engineers) to collaborate on the same project without overwriting each other’s work.
+
+🔧 Types of Version Control Systems:
+1.Centralized VCS
+	Example: SVN (Subversion)
+	Single central server over the network contains all versions.
+	Issue: If server is down, no work.
+
+2.Distributed VCS (most common today)
+	Example: Git, Mercurial
+	when we connect local to the centralised repository
+	Every developer has a full copy of the codebase including its history.
+	Popular platform: GitHub, GitLab, Bitbucket
+
+🚀 Why do QA/Testers need VCS?
+To store test automation code (Selenium/TestNG framework, API tests, etc.)
+To track changes made to test scripts and config files
+To collaborate with developers, especially in agile/DevOps workflows
+To revert to a previous version in case something breaks
+
+| Command                   | Description                         |
+| ------------------------- | ----------------------------------- |
+| `git status`              | Check current status of files       |
+| `git add .`               | Stage all modified files            |
+|"git commit -m "message"`  | Save your changes with a message	  |
+| `git push`                | Upload changes to remote repository |
+| `git pull`                | Download latest changes from remote |
+| `git log`                 | View history of commits             |
+
+
+We use Git for version control. All test automation code and test data are versioned, reviewed, and maintained in GitHub.
+This enables collaboration with developers and allows QA to integrate tests into CI/CD pipelines effectively."
+"We use Git to version control our automation framework.
+ It helps track all changes, collaborate with team members through branching and pull requests, and roll back quickly if any issue occurs after a new commit."
+ 
+✅ 1. Track Changes
+Every change made to the code (or test scripts) is recorded.
+You can see who changed what, when, and why.
+Helps in identifying the root cause of issues (e.g., when a test suddenly starts failing).
+
+🤝 2. Collaborate Efficiently
+Multiple team members (devs, QAs, DevOps) can work on the same project simultaneously without overwriting each other’s work.
+Branching allows working in isolation and merging changes later.
+Enables code reviews via pull requests.
+
+🔄 3. Roll Back to Previous Versions
+If something breaks, you can revert back to a previously working state.
+You can compare previous and current versions to understand differences.
+
+###############################################################################################################################################
+Git Bash is a terminal emulator for Windows that provides a Unix-like command-line experience. 
+It's commonly installed along with Git on Windows.
+
+
+✅ To create nested folders:
+mkdir -p dsa/arrays/easy
+The -p flag ensures parent directories are created if they don’t exist.
+
+✅ How to Check Where You Are
+Use pwd (print working directory):
+	pwd
+This tells you your current location in the file system.
+
+✅ To Move Into a Directory
+	cd dsa
+
+✅To initialise the git repository:
+	$ git init
+Initialized empty Git repository in C:/Users/remya/my-git-lab/.git/
+to list .git file, use ls -a which lists all the hidden file also.
+.git is where git tracks all versions.
+
+✅Git config to set or get configurations:
+git config is used to set or get Git configuration values — like your name, email, editor, merge tool, etc.
+It helps Git know who you are and how it should behave in your project or globally.
+
+🔧 Common Git Config Commands
+1. Set Global Username and Email (needed for commits):
+	git config --global user.name "Your Name"
+	git config --global user.email "your.email@example.com"
+These settings apply to all Git repositories on your system.
+
+2. Set Username and Email Only for Current Repo:
+	git config user.name "Your Name"
+	git config user.email "your.email@example.com"
+Used when you want different identities per project.
+
+3. Check Your Current Git Config:
+	git config --list
+This will list all active configuration settings.
+
+4. Check a Specific Config Value:
+	git config user.name
+	git config user.email
+
+✅To Stage the files:
+ git add file1.java file2.java folder/file3.java
+
+	✅ 1. Add All Modified & New Files
+		git add .
+	This adds everything in the current directory and below (new + changed files). Very common.
+
+	✅ 2. Add Specific Files
+		git add file1.java file2.java folder/file3.java
+	Use this if you want to stage only selected files.
+
+	✅ 3. Add All Files Recursively
+		git add -A
+	This also stages deleted files, unlike git add .
+	Before committing, always check what's staged:
+		git status
+
+✅ 3. Commit the changes (save a snapshot):
+	git commit -m "Your meaningful commit message"
+
+
+✅ 4. Push to remote repo (like GitHub):
+	git push origin branch-name
+For example:
+	git push origin main
+
+
+
+
+✅ These are common Git commands used in various situations:
+
+Start a working area (see also: git help tutorial)
+   clone      Clone a repository into a new directory
+   init       Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add        Add file contents to the index
+   mv         Move or rename a file, a directory, or a symlink
+   restore    Restore working tree files
+   rm         Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect     Use binary search to find the commit that introduced a bug
+   diff       Show changes between commits, commit and working tree, etc
+   grep       Print lines matching a pattern
+   log        Show commit logs
+   show       Show various types of objects
+   status     Show the working tree status
+
+grow, mark and tweak your common history
+   backfill   Download missing objects in a partial clone
+   branch     List, create, or delete branches
+   commit     Record changes to the repository
+   merge      Join two or more development histories together
+   rebase     Reapply commits on top of another base tip
+   reset      Reset current HEAD to the specified state
+   switch     Switch branches
+   tag        Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch      Download objects and refs from another repository
+   pull       Fetch from and integrate with another repository or a local branch
+   push       Update remote refs along with associated objects
+
+
+GIT IGNORE:
+If there are some files you don’t want to commit, here are a few clean ways to handle that:
+✅ Option 1: Use .gitignore (Best Practice)
+Create a .gitignore file using "touch .gitignore" in your project root and list the files/folders you want Git to completely ignore.
+Open the file in a text editor (like Notepad)
+	notepad .gitignore
+Add patterns of files/folders you want to ignore to this .gitignore file. Example:
+	temp.txt
+	*.log
+	target/
+	.idea/
+	*.class
+Once listed in .gitignore, Git will stop tracking all above files which is in gitignore.
+
+🔄 If a file was already committed earlier, you also need to remove it from tracking using:
+	git rm --cached filename
+	
+✅ Option 2: Add only specific files instead of git add .
+Instead of:
+	git add .
+Use:
+	git add file1.java file2.java
+This gives you fine control over what gets committed.
+	
+✅ Option 3: Use git restore --staged to unstage accidentally added files
+If you mistakenly staged something:
+	git restore --staged filename
+	
+	
+	
+GIT RESTORE:
+
+git restore is a Git command used to undo changes in your working directory before commit.
+
+✅ Common Use Cases of git restore
+1. Discard local changes in a file (undo changes to match last commit):
+	git restore filename.java
+🔁 This resets the file to the last committed state (HEAD). All unsaved changes are lost.
+
+2. Restore multiple files:
+	git restore .
+This discards changes for all modified files in the current directory and subdirectories.
+
+🔥 What exactly happens:
+	It affects your working directory.
+	The file will go back to the state it was in after your last commit.
+	You’ll lose all local edits unless you’ve backed them up or stashed them.
+
+	Example Flow:
+	You edit file.txt
+	You run git status → shows as modified
+	You run:
+		git restore file.txt
+
+	Now:
+	Changes are gone
+	File is same as the last commit
+	git status will no longer show it as modified
+
+3. Unstage a file (if you already did git add):
+	git restore --staged filename.java
+This removes the file from the staging area (index), but keeps the local changes in your file.
+
+	✅ git restore --staged <file> — What it does:
+	It unstages a file — i.e., moves it from STAGING → WORKING DIRECTORY.
+
+	🔸 It does NOT discard your file changes.
+	🔸 It just removes it from staging, so Git won’t include it in the next commit.
+
+	🔄 Example Scenario:
+	Let’s say:
+	You modified a file → file.txt
+	You added it to staging → git add file.txt
+	Now you change your mind and don’t want to commit it (for now).
+
+	Run:
+	git restore --staged file.txt
+	
+	✅ This will unstage the file.
+	But your modifications are still present in your working directory (your edited file is untouched).
+	
+🔥 If You Want to Discard Changes Too:
+If you want to:
+	Unstage the file
+	AND discard changes (i.e., go back to last committed version):
+
+	git restore --staged file.txt
+	git restore file.txt
+
+| Action                         | Command                         |
+| ------------------------------ | ------------------------------- |
+| Unstage file (keep changes)    | `git restore --staged file.txt` |
+| Discard changes in working dir | `git restore file.txt`          |
+| Undo both (unstage + discard)  | Use both above in order         |
+	
+	
+
+| Action                         | Command                         |
+| ------------------------------ | ------------------------------- |
+| Discard changes in a file      | `git restore file.txt`          |
+| Discard changes in all files   | `git restore .`                 |
+| Unstage a file after `git add` | `git restore --staged file.txt` |
+
+#######################################################################################################################################################
+GIT RESET:
+1. 🟥 git reset --hard
+	Moves HEAD back.
+	Deletes changes from staging and working directory.
+	Dangerous! Removes data.
+	Best used when you’re absolutely sure.
+
+2. 🟧 git reset --mixed (default)
+	Moves HEAD back.
+	Keeps changes in working directory (unstaged).
+	Unstages all files — useful for reselecting files to commit.
+
+3. 🟨 git reset --soft
+	Moves HEAD back.
+	Keeps all changes in staging area (index).
+	Use when you want to rewrite a commit but keep changes ready to recommit.
+
+🔙 Undo Commands:
+🔁 git restore <file>:
+	Go back from Working Directory → Last committed version.
+
+🔁 git restore --staged <file>:
+	Go back from Staging → Working directory (unstage, but don’t delete edits).
+
+🧠 Make Note:
+All resets move HEAD to a previous commit.
+soft keeps changes staged.
+mixed unstages but keeps them.
+hard deletes everything done after that commit.
+##################################################################################################################################################
+GIT STASH:
+
+🧠 What is git stash?
+git stash temporarily saves your uncommitted changes (both staged and unstaged) so you can switch branches or do other work without losing your current progress.
+Think of it like putting your work in a locker until you need it again.
+
+📦 What it stashes:
+✅ Changes in tracked files which are staged/unstaged
+✅ Staged (git add) changes
+✅ Unstaged modifications of tracked files
+❌ Not included by default: Untracked files and ignored files (unless specified with options). use git stash -u to include new files which are not staged .
+
+
+📌 Common Commands:
+🔹 1. Stash your changes:
+	git stash
+	➡ Moves changes out of working directory
+	➡ Leaves your repo clean (like last commit)
+	
+🔹 2. List all stashes:
+	git stash list
+	Example:
+	stash@{0}: WIP on main: 9fceb02 Add login tests
+	stash@{1}: WIP on feature: 3c4a1e2 Fix bug
+	
+🔹 3. Apply the most recent stash:
+	git stash apply
+	➡ Brings back changes but does not remove from stash list
+	
+🔹 4. Apply and remove it (pop):
+	git stash pop
+	➡ Restores and deletes from stash
+	
+🔹 5. Drop (delete) specific stash:
+	git stash drop stash@{0}
+	
+🔹 6. Stash including untracked files:
+	git stash -u
+	# or
+	git stash --include-untracked
+	
+	
+| File Type                            | Stashed?   | Notes                                                               |
+| ------------------------------------ | --------   | ------------------------------------------------------------------- |
+| 📝 **Tracked & Modified (unstaged)** | ✅ Yes    | These are included in the stash.                                    |
+| ✅ **Staged (after `git add`)**      | ✅ Yes    | Staged changes are also included in the stash.                      |
+| ❌ **Untracked files**               | ❌ No     | New files not added with `git add` are NOT stashed by default.      |
+| 🚫 **Ignored files** (`.gitignore`)  | ❌ No     | Git never stashes ignored files unless forced (advanced use cases). |
+
+
+🧪 Examples
+Assume the following changes in your working directory:
+file1.java → modified but not staged ✅ (tracked file)
+file2.java → modified and staged ✅
+newFile.txt → newly created, not added ❌ (untracked)
+
+➤ If you run:
+	git stash
+Only file1.java and file2.java will be stashed.
+newFile.txt will remain in the working directory (still untracked)
+
+🛡️ To stash untracked files too:
+Use:
+	git stash -u
+Now newFile.txt will also be included in the stash.
+
+
+	
+💡 Real-world Use Case:
+You’re halfway through a bug fix but need to switch to main to fix something critical.
+	git stash
+	git checkout main
+	# fix the critical issue in main branches and come back to feature branch.
+
+	git checkout feature-branch
+	git stash pop
+	
+when you have multiple stashes, each one is saved as a snapshot in a stack-like structure.
+
+🔍 To view all stashes:
+	git stash list
+Output example:
+	stash@{0}: WIP on main: 34ac2f1 Added new login feature
+	stash@{1}: WIP on main: a1b2c3d Updated styles
+	stash@{2}: WIP on main: f3e4g5h Debug logs
+
+✅ To apply a particular stash:
+📌 Apply but keep it in stash list:
+	git stash apply stash@{1}
+	
+🧹 Apply and remove from stash list:
+	git stash pop stash@{1}
+	⚠️ stash@{0} is always the most recent.
+	
+❌ To drop (delete) a particular stash:
+	git stash drop stash@{2}
+	
+🧼 To clear all stashes:
+	git stash clear
+	
+📦To see what's inside a stash:
+	git stash show stash@{1}
+	
+#############################################################################################################################################################
+
+why do we need branches in git?
+Work on a new feature without affecting the new code
+Fix a bug without stopping others from continuing their work
+Experiment with ideas safely
+
+isolation +Parallelism +safety
+
+🔹 git branch
+Purpose: View, create, or delete branches.
+
+Common Usage:
+git branch           # List all local branches
+git branch <name>    # Create a new branch
+git branch -d <name> # Delete a branch
+
+git branch feature/login
+
+🔹 git push
+Purpose: Upload local commits to a remote repository.
+
+Common Usage:
+git push origin <branch-name>
+
+✅ Example:
+git push origin main
+
+Push a newly created local branch:
+	git push -u origin feature/login
+			-u sets the upstream branch for future git push/git pull.
+			
+
+🔹 git pull
+Purpose: Fetch from remote repo and merge changes into your current branch.
+
+Usage:
+	git pull origin <branch-name>
+
+✅ Example:
+git pull origin main
+
+It’s equivalent to:
+	git fetch origin
+	git merge origin/main
+
+Fastforward Merging:
+
+A fast-forward merge happens when the current branch has no new commits compared to the branch being merged. 
+So Git doesn’t need to create a new merge commit — it just "fast-forwards" the pointer.
+
+
+🔹 Example:
+Suppose you’re on main:
+		main: A---B---C
+
+Now someone creates a branch feature from C and adds two commits:
+	feature: A---B---C---D---E
+
+If main has no new commits since C, then when you do:
+
+	git checkout main
+	git merge feature
+
+Git sees that main can simply move forward to match feature, like this:
+
+main: A---B---C---D---E
+✅ No conflicts
+✅ No merge commit
+✅ This is a fast-forward merge
+
+
+🔸 When does fast-forward NOT happen?
+If both main and feature have diverged, like:
+	main:   A---B---C---M1
+                   \
+feature:            D---E
+Then Git can’t fast-forward, and it creates a merge commit to bring the branches together.
+
+###############################################################################################################################################
+
+🧩 Scenario:
+You're working on a feature branch (say, feature/login).
+While you're working, someone else makes changes to the main branch and pushes it.
+You commit & push your changes to feature/login.
+Now you want to merge main into your branch to stay updated.
+
+❓ What happens if main has changes since your branch started?
+✅ You won't get a fast-forward merge, because the branches have diverged.
+⛔ Git will need to merge or rebase the changes.
+
+
+✅ You can commit your work in the feature branch first, then pull from main.
+That is the recommended and safe approach.
+
+🔁 So the correct sequence is:
+✅ Do your work in feature branch
+✅ Stage and commit your changes
+	git add .
+	git commit -m "Feature complete"
+✅ (Optional) Push your work to remote
+	git push origin feature/login
+✅ Now update your branch with the latest main:
+	Either via rebase (preferred for clean history):
+		git fetch origin
+		git rebase origin/main
+Or via merge:
+	git fetch origin
+	git merge origin/main
+✅ Resolve any conflicts (if there are any)
+✅ Push updated feature branch again if rebased or merged:
+	git push origin feature/login   # or git push -f if rebased
+
+❓ Why not pull from main before committing?
+If you pull first:
+Git will try to merge main into your uncommitted local feature changes.
+This may lead to conflicts with uncommitted work.
+You’ll be stuck resolving merge conflicts before your own work is even committed — messy and risky.
+
+📌 TL;DR:
+✅ Always commit first, then pull from main.
+That way:
+Your changes are saved
+Merges or rebases are safer and more predictable
+You avoid losing or mixing up local uncommitted work
+
+
+✅ Best Practice: Rebase your feature branch on top of main after commiting your changes in the feature branch
+
+This rewrites your feature branch as if it started from the latest main.
+# Step 1: Make sure you are on your feature branch
+git checkout feature/login
+
+# Step 2: Fetch latest main from remote
+git fetch origin
+
+# Step 3: Rebase your branch on top of latest main
+git rebase origin/main
+Now your branch has:
+
+All the latest code from main
+
+Your commits replayed on top of it
+→ This makes the final merge clean and fast-forward friendly later.
+
+✅ Rebasing keeps your history linear and clean — great for PRs!
+
+✅ Best Practice Flow (Rebase after commit):
+🟡 You're on your feature branch (say: feature/login)
+You’ve made some changes.
+
+✅ Step 1: Commit your changes in feature branch
+	git add .
+	git commit -m "Add login functionality"
+	(Optional) Push it:
+	git push origin feature/login
+
+✅ Step 2: Fetch the latest changes from main
+	git fetch origin
+	This gets the most recent code from the remote main branch — but doesn’t merge yet.
+✅ Step 3: Rebase your branch on top of latest main
+	git rebase origin/main
+	
+What happens now:
+Git temporarily removes your commit(s)
+Then applies origin/main changes
+Then reapplies your commits on top
+So your feature branch will now look like:
+
+main:   A---B---C
+                 \
+feature:          D---E
+
+Where:
+A-B-C = commits in main
+D-E = your commits, replayed cleanly on top
+
+✅ Step 4: (if pushed earlier) — Force-push your updated feature branch:
+	git push -f origin feature/login
+Because rebase rewrites history, you must force push (-f).
+
+| Action               | Done before rebase?                                      |
+| -------------------- | -------------------------------------------------------- |
+| Commit in feature    | ✅ Yes — must do it before rebasing                       |
+| Fetch from main      | ✅ Yes — to get the latest `origin/main`                  |
+| Rebase onto main     | ✅ Yes — brings `main` changes into your feature branch   |
+| Push updated feature | ✅ After rebase (use `--force` if already pushed earlier) |
+
+✅ Best Practice (if you haven’t pushed yet):
+🔒 Don't push before rebasing.
+💡 Just commit → fetch → rebase → then push.
+
+🔁 Cleanest and safest flow:
+✅ Do your work on feature branch
+✅ git add .
+✅ git commit -m "Your message"
+✅ git fetch origin
+✅ git rebase origin/main
+✅ If everything is clean → git push origin feature/login
+
+🚫 Why avoid pushing before rebasing?
+If you push first, and then rebase:
+Your local history changes (due to rebase)
+You’ll need to force-push (git push -f)
+That can be risky in shared branches, especially if someone else also pulled your pushed commits.
+
+GIT CHECKOUT:
+git checkout -b featurebranch-> This cmd will create a branch called featurebranch and switch to that.
+
+two types of merge: Fast forward and ORT(ostensibly recursive's twin) aka three-way merge :
+Three-way merge :
+A three-way merge in Git is a method used to merge two branches that have diverged from a common ancestor. It's the standard merge strategy used by Git when you run:
+	git merge <branch-name>
+	
+	It involves three commits:
+
+Base (common ancestor commit)
+
+HEAD (your current branch)
+
+Other branch (the branch you’re merging into your current branch)
+
+Git compares the changes from the base to each branch, then combines those changes into a new merge commit.
+
+✅ Example:
+Let’s say you’re on main and want to merge feature:
+git checkout main
+git merge feature
+
+Git will:
+Find the common ancestor between main and feature
+Compare main and feature to the base
+Create a new merge commit combining both changes (if no conflicts)
+
+🔀 Merge Conflict Example:
+If both main and feature changed the same line, Git will prompt you to resolve a merge conflict manually.
+CONFLICT (content): Merge conflict in file.txt
+Then you resolve the conflict, add the resolved file, and complete the merge:
+	git add file.txt
+	git commit
+	
+🧠 Scenario
+You have two branches that started from the same commit A.
+You made two commits on main: B → C
+Meanwhile, someone made commits on feature: D → E
+
+
+      A
+     / \
+    B   D
+    |    \
+    C     E
+
+Now you're on branch main (at commit C), and you want to merge in feature (at E).
+
+🔄 Three-Way Merge Components:
+Base = commit A (common ancestor)
+HEAD = commit C (your current branch, main)
+Other branch =commit  E (branch you want to merge in, feature)
+
+Git compares changes:
+From A to C (what you changed)
+From A to E (what the other branch changed)
+Then Git combines the two sets of changes into a new merge commit (e.g., M):
+
+      A
+     / \
+    B   D
+    |    \
+    C     E
+     \   /
+      \ /
+       M  ← merge commit created by Git
+This is what we call a three-way merge: Git uses three points (A, C, E) to resolve and merge.
+
+To delete branch: git branch -d branchName
+but if u do git log, you can still the 3 way merge commits made from this branch
+
+
+🌐 What is GitHub?
+GitHub is a web-based platform used to store, share, and collaborate on code using Git version control.
+Think of it as:
+🧠 Git = Tool that tracks changes in your code
+🌍 GitHub = Online platform to host Git repositories, collaborate with others, and manage code projects
+
+
+🔑 Key Features of GitHub:
+| Feature                | What It Does                                   |
+| ---------------------- | ---------------------------------------------- |
+| 🗂 Repositories        | Store your code and version history            |
+| 🔀 Branching & Merging | Work on different versions of your code safely |
+| 📦 Pull Requests       | Propose changes and review them before merging |
+| ✅ Issues & Projects    | Track bugs, tasks, features like a to-do list  |
+| 👥 Collaboration       | Teams can work together on the same repo       |
+| 🔒 Permissions         | Control who can view/edit the code             |
+
+📌 Real-World Uses
+Developers push their code to GitHub (like saving a backup online)
+Teams review code changes using pull requests
+Open-source projects allow anyone to contribute
+CI/CD tools like Jenkins, GitHub Actions integrate directly with GitHub
+
+
+🧪 Simple Analogy
+🗃 Git = Your personal notebook where you track all your work and changes
+📤 GitHub = A shared online folder where you upload that notebook so your team can see or contribute
+
+🔗 git remote add — What Does It Do?
+📌 Command:
+	git remote add <name> <URL>
+✅ Purpose:
+This command connects your local Git repo to a remote repository (like GitHub, GitLab, Bitbucket, etc.) so you can push or pull code from that remote location.
+
+📦 Example:
+Let’s say you created a repository on GitHub called my-project.
+GitHub gives you a URL like:
+	https://github.com/yourusername/my-project.git
+Now you want to push your local project to that repo.
+
+
+🧪 Step-by-step:
+git init                            # Initialize local repo (if not already)
+git remote add origin https://github.com/yourusername/my-project.git
+
+Here:
+origin = common nickname for the default remote
+The URL is your remote GitHub repository
+
+Now you can push:
+	git push -u origin main
+
+🔍 Check Remotes
+To see what remotes you have:
+	git remote -v
+	
+op:
+origin  https://github.com/yourusername/my-project.git (fetch)
+origin  https://github.com/yourusername/my-project.git (push)
+
+
+| Command          | Meaning                                         |
+| ---------------- | ----------------------------------------------- |
+| `git remote add` | Link local repo to a remote one                 |
+| `origin`         | Nickname for the remote (can be anything)       |
+| `push/pull`      | You can now push code to GitHub or pull updates |
+
+✅ Q1: How does Git identify origin? Where is it stored?
+When you run:
+
+bash
+Copy
+Edit
+git remote add origin <url>
+Git stores that remote configuration in your local .git folder, specifically inside:
+
+arduino
+Copy
+Edit
+.git/config
+You can view it like this:
+
+bash
+Copy
+Edit
+cat .git/config
+You’ll see something like:
+
+ini
+Copy
+Edit
+[remote "origin"]
+    url = https://github.com/yourusername/your-repo.git
+    fetch = +refs/heads/*:refs/remotes/origin/*
+So now, Git knows:
+
+When you say origin, it should use that URL
+
+And that it's the default place to push and pull
+
+✅ Q2: Can we use any name instead of origin?
+Yes! You can give any custom name to a remote.
+
+🔁 Example:
+bash
+Copy
+Edit
+git remote add github https://github.com/yourusername/my-project.git
+Then you push like this:
+
+bash
+Copy
+Edit
+git push github main
+Instead of:
+
+bash
+Copy
+Edit
+git push origin main
+💡 origin is just a convention — not a rule. It's the default name Git suggests, but you're free to use anything like:
+
+upstream
+
+backup
+
+production
+
+bitbucket
+
+personal
+
+🔎 See All Remotes:
+bash
+Copy
+Edit
+git remote -v
+Example output:
+
+perl
+Copy
+Edit
+origin    https://github.com/yourusername/my-project.git (fetch)
+origin    https://github.com/yourusername/my-project.git (push)
+backup    https://gitlab.com/yourusername/my-project.git (fetch)
+backup    https://gitlab.com/yourusername/my-project.git (push)
+
+
+
+🔍 What Happens Internally When You Run:
+
+	git remote add origin https://github.com/user/repo.git
+Git adds a section to your local repo's .git/config file (inside your project folder).
+
+📂 .git/config File Content Example:
+
+After running the above command, the file will include:
+
+[remote "origin"]
+    url = https://github.com/user/repo.git
+    fetch = +refs/heads/*:refs/remotes/origin/*
+This means:
+"origin" is the nickname you gave the remote.
+The url is where Git pushes/pulls your code.
+The fetch line tells Git how to retrieve branches when you do git fetch or git pull.
+So yes — it literally stores this info in a plain text config file.
+
+🧠 Why This Is Useful:
+Now when you run git push origin main, Git knows:
+"Ah, origin refers to https://github.com/user/repo.git"
+When you clone a repo, Git automatically adds origin for you based on the URL you cloned from.
+
+🛠 Where is .git/config located?
+It's inside your Git project root:
+
+your-project/
+├── .git/
+│   ├── config  ← ← this is the file modified
+You can open and edit this file directly, though using Git commands is safer.
+
+🔼 What Does git push -u Do?
+Full command:
+	git push -u origin main
+	
+Here’s what each part means:
+| Part                     | Meaning                                               |
+| ------------------------ | ----------------------------------------------------- |
+| `git push`               | Push your commits to a remote repo                    |
+| `origin`                 | The remote name (usually GitHub URL you added)        |
+| `main`                   | The branch you’re pushing                             |
+| `-u` or `--set-upstream` | This **links** your local branch to the remote branch |
+
+
+✅ What Does -u Actually Do?
+It tells Git:
+“From now on, when I run git push or git pull without specifying a branch, assume I'm talking about origin/main.”
+So next time, you can just run:
+
+	git push
+…and Git will automatically push to origin main (no need to type it every time).
+
+🧠 Without -u:
+You’d have to type:
+	git push origin main
+every time you push or pull.
+
+
+📦 First Push Example:
+You just created a new branch main, and want to push it to GitHub for the first time:
+	git push -u origin main
+Now, Git links:
+	Your Local main branch  ⟷  origin/main (on GitHub)
+From now on:
+	git pull     # pulls from origin/main
+	git push     # pushes to origin/main
+
+
+git push origin feature:main means:
+"Push my local feature branch to the remote main branch"
+
+🧠 Format:
+	git push <remote> <local-branch>:<remote-branch>
+
+So:
+	git push origin feature:main
+This tells Git:
+Take my local feature branch
+Push its content into the main branch on origin
+
+✅ Where Does git clone Download the Repo?
+By default, when you run:
+	git clone https://github.com/user/repo.git
+It will:
+Create a new folder named repo (based on the repo name)
+Download it into your current working directory (i.e., wherever your terminal is pointing)
+
+📂 Example:
+You’re in this directory:
+	C:\Users\remya\Documents
+You run:
+
+	git clone https://github.com/user/myproject.git
+It creates:
+	C:\Users\remya\Documents\myproject\
+All the code and .git history will be downloaded into myproject/.
+
+
+If I git clone a repo, will it download all branches?
+✅ Yes and No — here's the truth:
+By default, git clone <repo-url>:
+Downloads the entire Git history (all branches, tags, commits)
+But only checks out the default branch (usually main or master)
+Other branches are available locally, but not checked out
+
+🔍 You can see them using:
+	git branch -a
+It will show:
+* main
+  remotes/origin/feature1
+  remotes/origin/bugfix
+
+You can switch to any:
+git checkout feature1
+
+✅ Q2: Can I specify a branch to clone & check out?
+Yes!
+git clone --branch <branch-name> <repo-url>
+Example:
+	git clone --branch develop https://github.com/user/project.git
+This will:
+Clone the full repo history
+download all branches and checkout branch specified
+Check out develop branch automatically
+All other branches will still be there unless you add --single-branch
+
+
+🚀 Optional: Download only one branch to save space
+git clone --branch develop --single-branch https://github.com/user/project.git
+This will:
+Clone only the develop branch
+Skip all other branches
+Save time and bandwidth
+
+✅ Why SSH to connect to github?
+No need to enter your username/password every time
+More secure than HTTPS
+Works great for frequent GitHub users
+
+The SSH agent is a background program that:
+Stores your private key securely in memory
+So you don’t have to re-type the passphrase or re-add the key every time you use git push, ssh, etc.
+Think of it as a keychain manager for your SSH keys.
+
+🔐 Step-by-Step: Connect GitHub via SSH:
+
+✅ Step 1: Create SSH keys
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+It will create:
+id_rsa (private key — DO NOT SHARE)
+id_rsa.pub (public key — this goes to GitHub)
+
+✅ Step 2: Start SSH agent & add key to it
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/id_rsa
+This makes Git use your private key in memory so you don’t have to enter a passphrase each time.
+
+
+✅ Step 4: Copy the SSH public key
+	cat ~/.ssh/id_rsa.pub
+Copy the full output (starts with ssh-rsa ...)
+
+✅ Step 5: Add key to GitHub
+Go to: https://github.com/settings/keys
+Click New SSH Key
+Paste your copied public key
+Give it a name (e.g. My Laptop)
+Click Add SSH Key
+
+✅ Step 6: Test the SSH connection
+Run:
+	ssh -T git@github.com
+You should see:
+	Hi your-username! You've successfully authenticated.
+	
+✅ Step 7: Use SSH when cloning
+Instead of:
+	git clone https://github.com/yourusername/repo.git
+Use:
+	git clone git@github.com:yourusername/repo.git
+Now Git will use SSH for all interactions — no password needed!
+
+🔁 Summary Commands:
+
+# Generate key
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+# Add to agent
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+# Copy public key
+cat ~/.ssh/id_rsa.pub
+
+# Test
+ssh -T git@github.com
+
+
+GIT REBASE:
+
+🔁 What is git rebase?
+✅ Definition:
+git rebase is a Git command used to move or replay commits from one branch onto another base, creating a cleaner and linear project history.
+
+🧠 Why Use Rebase?
+To make your commit history linear (no merge commits)
+To apply your changes on top of the latest code
+To clean up messy or outdated branches before pushing
+
+📌 Basic Syntax
+	git rebase <base-branch>
+Example:
+	git checkout feature
+	git rebase main
+This means:
+“Take all commits from feature branch, and replay them on top of the latest main branch.”
+
+🔍 Visual Before and After Rebase
+main:    A---B-----C
+                 \
+feature:          D---E
+
+🔁 After git rebase main from feature:
+
+main:    A---B---C
+                   \
+feature (rebased):  D'---E'
+D' and E' are new commits, replayed on top of C.
+
+⚠️ Caution: Never rebase shared branches
+If others have already pulled the old version of your branch, rebasing will rewrite commit history.
+That can cause conflicts and confusion.
+
+🎯 Example Workflow:
+Step-by-step:
+git checkout feature
+git fetch origin
+git rebase origin/main
+
+If there are conflicts:
+# Resolve conflicts manually
+git add <resolved-files>
+git rebase --continue
+
+✅ After rebasing:
+To push the rebased branch (because history changed):
+git push -f origin feature
+⚠️ -f (force push) is required after rebase!
