@@ -3,7 +3,7 @@ Devops NOTES
 
 SDLC: Software Development Life cycle: Design->Develop->Test->Deliver
 it is the process followed to design, develop, test, and deploy software systematically.
-
+test
 
 🔁 Phases of SDLC (Simplified for QA/Interviews):
 
@@ -1147,4 +1147,5 @@ git rebase --continue
 ✅ After rebasing:
 To push the rebased branch (because history changed):
 git push -f origin feature
+
 ⚠️ -f (force push) is required after rebase!
