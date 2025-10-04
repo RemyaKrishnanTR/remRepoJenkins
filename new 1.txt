@@ -1,0 +1,201 @@
+sss
+            <class name="com.automation.tests.AmazonTest" enabled="false"/>
+            <class name="com.automation.tests.SearchSuggestionsTest" enabled="false"/>
+            <class name="com.automation.tests.BrokenLinksTest" enabled="false"/>
+			<class name="com.automation.tests.FileUploadTest" enabled="false"/>
+			
+			public boolean verifyRowData(String companyName,String expectedPrice,String expectedChange)
+    {
+        for(WebElement row:getAllRows())
+        {
+            System.out.println(row);
+            List<WebElement> cols=getColumnsInRow(row);
+            if (cols.size() < 5) {
+                logger.warn("Skipping row with insufficient columns: " + row.getText());
+                continue;
+            }
+            System.out.println(cols.get(0).getText());
+            if(cols.get(0).getText().equalsIgnoreCase(companyName))
+            {
+                String actualPrice=cols.get(2).getText().trim();
+                String actualChange=cols.get(4).getText().trim();
+                return actualChange.equals(expectedChange) && actualPrice.equals(expectedPrice);
+            }
+
+        }
+        return false;
+    }
+}
+
+🚀 Pending Web-Table Enhancements
+Export to Excel
+
+Write out headers + all data rows into an .xlsx file (Apache POI).
+
+Save to a designated folder (output/, reports/, etc.).
+
+Read-Back & Validate Excel
+
+Open the generated workbook and verify:
+
+Headers match
+
+Row count equals the number of UI rows
+
+No empty cells in critical columns
+
+Data-Driven Tests from Excel
+
+Implement a @DataProvider that reads selected rows (e.g. specific company names) from the Excel file.
+
+Feed those into test methods for downstream workflows or more complex assertions.
+
+Sorting/Filtering Behavior (Optional but valuable)
+
+Automate clicking a column header (e.g. “Current Price”) to sort.
+
+Assert that the extracted list is actually in the sorted order.
+
+Robustness Improvements
+
+Skip or log rows with unexpected column counts.
+
+Handle hidden or paginated rows if the table grows.
+
+Add configurable timeouts/explicit waits for table loading.
+
+Reporting & CI Integration
+
+Embed the Excel snapshot or a summary report link into your Extent report or CI pipeline output.
+
+
+🔸 Suggested Next Milestones:
+1. Dynamic Drop-downs & Auto-Suggestions
+Useful for Google-style search
+
+Covers waits, keyboard actions, assertions
+
+2. Pagination Handling in Web Tables
+Automate finding data across multiple table pages
+
+3. Window/Tabs/Alerts/Frames Handling
+Often asked in interviews
+
+Shows ability to switch context effectively
+
+4. API Integration
+Hit an API, validate response, use data in UI test
+
+5. Parallel Execution with TestNG XML or ThreadPool
+Show scalability, useful for CI/CD
+
+6. CI/CD Pipeline Integration
+GitHub Actions / Jenkins config + Maven run
+
+🔸 1. Hybrid Automation Scenarios
+Combine multiple things in one test:
+
+E.g. Read from Excel → Search on site → Handle dynamic drop-down → Click → Verify in new window
+
+Covers: TestData, XPath, waits, validations, assertions, window handling
+
+Why it's asked: Tests your ability to orchestrate real-world flows with robustness.
+
+🔸 2. Framework Enhancements
+Start adding production-quality features:
+
+ExtentReports with screenshot logging per step
+
+Custom loggers with Log4j2
+
+ConfigReader for qa, stage, prod environments
+
+RetryAnalyzer + TestNG Listener combo
+
+Modular utility classes (waits, excel, browser setup, etc.)
+
+Why it's asked: They want to see if you can own and evolve a test framework — not just use Selenium.
+
+🔸 3. Coding & Design Challenges
+Amazon/MS-style interviewers might say:
+
+Write a method to remove duplicates from an array
+
+Design a mini test framework using OOP concepts
+
+Solve test-related coding problems (string, hashmap, binary search, etc.)
+
+You’re already preparing for this via LeetCode. You’re on the right track.
+
+🔸 4. Advanced Real-World Challenges
+File download & verify file system path
+
+API testing + UI testing integration
+
+Parallel cross-browser execution via Grid/Cloud
+
+Jenkins pipeline for CI/CD trigger
+
+GitHub Actions for test automation CI
+
+🔸 5. Behavioral & Ownership
+When did you prevent a production bug?
+
+How did your framework reduce manual effort?
+
+How do you ensure flaky tests don’t block CI?
+
+
+We will:
+
+Read search terms from an Excel file
+
+For each term:
+
+Open Amazon
+
+Type in the search box
+
+Wait for auto-suggestions
+
+Match suggestion from Excel
+
+Click the matched suggestion
+
+Validate that the resulting page contains the expected result
+
+Log status to Excel with PASS/FAIL and timestamp
+
+Capture screenshot for each search (optional but pro-level)
+
+Final test: Reads 5–10 terms from Excel and handles all variations
+
+xlsx
+
+
+ // Write result and timestamp to Excel
+    public void writeResult(String testCaseId, String result) throws IOException {
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
+            Row row = sheet.getRow(i);
+            if (row == null) continue;
+
+            Cell cellId = row.getCell(0);
+            if (cellId != null && cellId.getStringCellValue().equalsIgnoreCase(testCaseId)) {
+                Cell resultCell = row.createCell(4);
+                resultCell.setCellValue(result);
+
+                Cell timestampCell = row.createCell(5);
+                String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+                timestampCell.setCellValue(time);
+                break;
+            }
+        }
+        FileOutputStream fos = new FileOutputStream(filePath);
+        workbook.write(fos);
+        fos.close();
+    }
+
+    public void close() throws IOException {
+        workbook.close();
+    }
+}
